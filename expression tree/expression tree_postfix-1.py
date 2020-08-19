@@ -7,18 +7,18 @@ class infix_to_prefix:
     precedence={'+':3,'&':3,'(':2,')':1} 
     def __init__(self):
         self.items=[]
-        self.size=-1
+        self.top=-1
     def push(self,value):
         self.items.append(value)
-        self.size+=1
+        self.top+=1
     def pop(self):
         if self.isempty():
             return empty('list is empty')
         else:
-            self.size-=1
+            self.top-=1
             return self.items.pop()
     def isempty(self):
-        if(self.size==-1):
+        if(self.top==-1):
             return True
         else:
             return False
@@ -26,7 +26,7 @@ class infix_to_prefix:
         if self.isempty():
             return False
         else:
-            return self.items[self.size]
+            return self.items[self.top]
     def is0perand(self,i): 
         List_op = []
         for a in range(1000):
@@ -35,10 +35,6 @@ class infix_to_prefix:
             return True
         else:
             return False
-    def operator(self,i):
-        if (i == '&' or i == '+'):
-            return True
-        return false
     def reverse(self,expresstion): 
         rev=[]
         for i in expresstion:
@@ -70,26 +66,14 @@ class infix_to_prefix:
         while not self.isEmpty(): 
             self.output.append(self.pop()) 
         return prefix
-    def reverse_list(self,expresstion): 
-        exprl = [] 
-        wait = '' 
-        for i in expresstion:
-            if i == 'I': 
-                wait = i
-            else:
-                wait+= i
-                exprl.append(wait)
-                wait = ''
-        return exprl
 
 
 solve=infix_to_prefix() 
 expresstion = "!(I1+I0)"
 rev = ''
-exprl = solve.reverse_list(expresstion)
-rev=solve.reverse(exprl)
+rev=solve.reverse(rev)
 result=solve.infix_to_postfix(rev) 
-result = solve.reverse_list(result)
+
 
 
 
