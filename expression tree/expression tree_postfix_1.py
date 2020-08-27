@@ -1,3 +1,10 @@
+#############################################################
+
+#refbymedium.com
+#refbygeeksforgeeks
+
+#############################################################
+
 import pygame, sys
 from pygame.locals import *
 
@@ -56,9 +63,10 @@ class infix_to_prefix:
             if(self.isOperant(i)): 
                 postfix +=i
             elif(i == '&' or i =='+'): 
-                while(not self.isempty() and self.notGreater(i)):
+                if(not self.isempty() and self.notGreater(i)):
                     postfix += i
-                self.push(i) 
+                else:
+                    self.push(i) 
             elif i == '(':
                 self.push(i)
             elif i == ')':
@@ -75,11 +83,19 @@ class infix_to_prefix:
         return postfix
 
 
+
 obj=infix_to_prefix() 
-exp = "!(I0&I1)+!(I1+I2)"
+exp = "!(1+0)"
+#exp="!(1+0)"
+#exp="!(!(0+I0&1))"
+#exp="(I0+!I1+!(I2))&(!I0+I1+I2)"
+#exp="!(I0&I1)+!(I1+I2)"
+#exp="(((I0&I1&!I2)+!I1)+I3)"
 rev = ''
 rev=obj.reverse(exp)
 out=obj.infix_to_postfix(rev) 
+
+
 
 
 postfix=obj.reverse(out)
@@ -124,23 +140,23 @@ while True: # the main game loop
     pygame.draw.line(screen, green, (column_pos[0],row_pos[1]), (column_pos[0]-100,row_pos[2]),8)
     pygame.draw.line(screen, green, (column_pos[0],row_pos[1]), (column_pos[0]+100,row_pos[2]),8)
 
-
-    text = '+'
+  
+    text = '!'
     label = font.render(text,True,black)
     pygame.draw.circle(screen, powderblue, (400, 50), 40, 0)
     screen.blit(label,(380,20))
 
-    text = '&'
+    text = '+'
     label = font.render(text,True,black)
     pygame.draw.circle(screen, powderblue, (220, 200), 40, 0)
     screen.blit(label,(190,180))
 
-    text = 'i0'
+    text = '1'
     label = font.render(text,True,black)
     pygame.draw.circle(screen, powderblue, (100, 350), 40, 0)
     screen.blit(label,(85,330))
 
-    text = 'i1'
+    text = '0'
     label = font.render(text,True,black)
     pygame.draw.circle(screen, powderblue, (300, 350), 40, 0)
     screen.blit(label,(285,330))
